@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPI DANANTARA - Sovereign Wealth Fund Indonesia</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts: Inter & Cinzel for Sovereign Luxury Aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 JS Bundle (Includes Popper.js for mobile navbar collapse) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js for Interactive Financial Projections -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --navy-dark: #070F1E;
+            --navy-main: #0B192C;
+            --navy-card: #14243B;
+            --navy-light: #1E304B;
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-gradient: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+            --crimson: #C8102E;
+            --bg-light: #F8FAFC;
+            --text-dark: #0F172A;
+            --text-muted: #64748B;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--navy-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-primary);
+            border-radius: 4px;
+        }
+
+        .text-gold {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-gold {
+            background: var(--gold-gradient);
+            color: #000;
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: #0B192C;
+            font-weight: 700;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            opacity: 0.92;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+            color: #000;
+        }
+
+        .border-gold {
+            border-color: var(--gold-primary) !important;
+        }
+
+        .bg-navy {
+            background-color: var(--navy-main);
+        }
+
+        .navbar {
+            background-color: rgba(11, 25, 44, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand img {
+            height: 42px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+
+        .nav-link {
+            color: #E2E8F0 !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem !important;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-primary) !important;
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(180deg, rgba(7, 15, 30, 0.92) 0%, rgba(11, 25, 44, 0.98) 100%),
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            color: #ffffff;
+            padding: 90px 0 70px 0;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .metric-card {
+            background: rgba(20, 36, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            border: 1px solid #E2E8F0;
+            color: #334155;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--navy-main);
+            color: var(--gold-primary);
+            border-color: var(--navy-main);
+            box-shadow: 0 4px 12px rgba(11, 25, 44, 0.25);
+        }
+
+        .org-card {
+            background: #ffffff;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .org-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(11, 25, 44, 0.12);
+            border-color: var(--gold-primary);
+        }
+
+        .org-avatar-box {
+            height: 130px;
+            background: linear-gradient(135deg, var(--navy-main), var(--navy-light));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .org-avatar-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--gold-primary);
+            object-fit: cover;
+            background: #ffffff;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        .category-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .tree-container {
+            overflow-x: auto;
+            padding: 30px 10px;
+        }
+
+        .tree-node {
+            background: var(--navy-card);
+            border: 1px solid var(--gold-primary);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 12px 18px;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .tree-node:hover {
+            transform: scale(1.04);
+        }
+
+        .tree-node-title {
+            font-size: 0.85rem;
+            color: var(--gold-primary);
+            font-weight: 700;
+        }
+
+        .tree-node-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .tree-line {
+            width: 2px;
+            height: 24px;
+            background-color: var(--gold-primary);
+            margin: 0 auto;
+        }
+
+        .holding-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #E2E8F0;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .holding-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gold-gradient);
+        }
+
+        .holding-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .bumn-card {
+            background: #ffffff;
+            border: 1px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .bumn-card:hover {
+            background: rgba(212, 175, 55, 0.04);
+            border-color: var(--gold-primary);
+            transform: translateY(-3px);
+        }
+
+        .bumn-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(11, 25, 44, 0.06);
+            color: var(--navy-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .calculator-box {
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-main) 100%);
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #ffffff;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .custom-range::-webkit-slider-thumb {
+            background: var(--gold-primary);
+        }
+
+        .section-title-badge {
+            color: var(--gold-primary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .fs-7 { font-size: 0.85rem; }
+        .fs-8 { font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top py-2" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <!-- SVG Logo Emblem for BPI Danantara -->
+                <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="48" fill="#0B192C" stroke="#D4AF37" stroke-width="4"/>
+                    <path d="M50 15 L62 38 L88 42 L68 60 L74 85 L50 72 L26 85 L32 60 L12 42 L38 38 Z" fill="url(#goldGrad)"/>
+                    <defs>
+                        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#BF953F"/>
+                            <stop offset="50%" stop-color="#FCF6BA"/>
+                            <stop offset="100%" stop-color="#AA771C"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="d-flex flex-column">
+                    <span class="font-cinzel fw-bold text-white fs-6 lh-1">BPI <span class="text-gold">DANANTARA</span></span>
+                    <small class="text-white-50 fs-8 tracking-wider">SOVEREIGN WEALTH FUND</small>
+                </div>
+            </a>
+
+            <!-- Mobile Hamburger Button with Bootstrap Collapse standard attributes -->
+            <button class="navbar-toggler border border-secondary text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars fs-4 text-gold"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav mx-auto my-2 my-lg-0 gap-lg-1">
+                    <li class="nav-item"><a class="nav-link active" href="#beranda">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#struktur">Struktur Organisasi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#holding">Arsitektur Holding</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portofolio">Portofolio BUMN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#simulasi">Simulasi AUM</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#media">Pusat Media</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div class="input-group input-group-sm" style="max-width: 220px;">
+                        <span class="input-group-text bg-dark border-secondary text-gold"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="quickSearchInput" class="form-control bg-dark text-white border-secondary fs-7" placeholder="Cari Tokoh / Divisi..." onkeyup="handleQuickSearch(event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="beranda">
+        <div class="container position-relative z-1">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7">
+                    <div class="mb-3">
+                        <span class="hero-badge">
+                            <i class="fa-solid fa-shield-halved text-gold"></i>
+                            SOVEREIGN WEALTH FUND REPUBLIK INDONESIA
+                        </span>
+                    </div>
+                    <h1 class="display-4 font-cinzel fw-bold mb-3 text-white lh-sm">
+                        Badan Pengelola Investasi <br>
+                        <span class="text-gold">Daya Anagata Nusantara</span>
+                    </h1>
+                    <p class="lead text-white-50 mb-4 me-lg-4 fs-6">
+                        Mengonsolidasi, mengelola, dan mengoptimalkan aset-aset strategis bangsa demi mengakselerasi pertumbuhan ekonomi, hilirisasi industri, serta kemakmuran berkelanjutan bagi generasi masa depan Indonesia.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#struktur" class="btn btn-gold btn-lg px-4 py-2.5 rounded-pill shadow-lg d-inline-flex align-items-center gap-2 fs-6">
+                            <i class="fa-solid fa-sitemap"></i>
+                            <span>Jelajahi Struktur Resmi</span>
+                        </a>
+                        <a href="#simulasi" class="btn btn-outline-light btn-lg px-4 py-2.5 fw-semibold rounded-pill d-inline-flex align-items-center gap-2 fs-6">
+                            <i class="fa-solid fa-chart-line text-gold"></i>
+                            <span>Simulasi AUM</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="metric-card h-100">
+                                <i class="fa-solid fa-vault text-gold fs-2 mb-2 d-block"></i>
+                                <h3 class="fw-bold text-white mb-0 font-cinzel">$600B+</h3>
+                                <small class="text-white-50 fs-8 d-block uppercase fw-semibold">Target Potensi AUM</small>
+                                <span class="badge bg-success bg-opacity-25 text-success border border-success mt-2 fs-8">Konsolidasi BUMN</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-card h-100">
+                                <i class="fa-solid fa-diagram-project text-gold fs-2 mb-2 d-block"></i>
+                                <h3 class="fw-bold text-white mb-0 font-cinzel">2 Holding</h3>
+                                <small class="text-white-50 fs-8 d-block uppercase fw-semibold">Operasional & Investasi</small>
+                                <span class="badge bg-info bg-opacity-25 text-info border border-info mt-2 fs-8">Struktur Dual-Hub</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-card h-100">
+                                <i class="fa-solid fa-building-columns text-gold fs-2 mb-2 d-block"></i>
+                                <h3 class="fw-bold text-white mb-0 font-cinzel">7 BUMN Utama</h3>
+                                <small class="text-white-50 fs-8 d-block uppercase fw-semibold">Tahap Awal Konsolidasi</small>
+                                <span class="badge bg-warning bg-opacity-25 text-warning border border-warning mt-2 fs-8">Perbankan, Energi, Mining</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-card h-100">
+                                <i class="fa-solid fa-globe text-gold fs-2 mb-2 d-block"></i>
+                                <h3 class="fw-bold text-white mb-0 font-cinzel">Global Board</h3>
+                                <small class="text-white-50 fs-8 d-block uppercase fw-semibold">Penasihat Internasional</small>
+                                <span class="badge bg-primary bg-opacity-25 text-primary border border-primary mt-2 fs-8">Ray Dalio, Sachs, etc</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="struktur">
+        <div class="container py-3">
+            <div class="text-center max-w-2xl mx-auto mb-4">
+                <span class="section-title-badge">Struktur Resmi Terdaftar</span>
+                <h2 class="fw-bold font-cinzel display-6 text-dark">Organisasi BPI DANANTARA</h2>
+                <p class="text-muted fs-6">
+                    Tata kelola berstandar dunia berdasarkan mandat kepemimpinan nasional, dewan pengawas independen, dewan penasihat global, serta jajaran eksekutif profesional.
+                </p>
+            </div>
+
+            <!-- View Switcher & Filters -->
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 mb-4 bg-white p-3 rounded-4 shadow-sm border">
+                <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start" id="filterButtonGroup">
+                    <button class="filter-btn active" onclick="filterOrg('all')">Semua (All)</button>
+                    <button class="filter-btn" onclick="filterOrg('pembina')">Pembina & Pengarah</button>
+                    <button class="filter-btn" onclick="filterOrg('pengawas')">Dewan Pengawas</button>
+                    <button class="filter-btn" onclick="filterOrg('penasihat')">Penasihat Global</button>
+                    <button class="filter-btn" onclick="filterOrg('bod')">Badan Pelaksana (BOD)</button>
+                    <button class="filter-btn" onclick="filterOrg('md')">Managing Directors</button>
+                    <button class="filter-btn" onclick="filterOrg('komite')">Komite Pengawasan</button>
+                </div>
+
+                <!-- Toggle View Mode: Grid vs Tree -->
+                <div class="btn-group border rounded-pill p-1 bg-light" role="group">
+                    <button type="button" class="btn btn-sm btn-dark rounded-pill px-3 active" id="viewCardBtn" onclick="switchView('card')">
+                        <i class="fa-solid fa-grip me-1"></i> Grid Cards
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3 border-0" id="viewTreeBtn" onclick="switchView('tree')">
+                        <i class="fa-solid fa-diagram-project me-1"></i> Tree Chart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Container A: Card Grid View -->
+            <div id="cardGridView" class="row g-3 g-md-4">
+                <!-- Javascript dynamically injects profile cards -->
+            </div>
+
+            <!-- Container B: Tree Structure View -->
+            <div id="treeChartView" class="d-none bg-dark text-white rounded-4 p-4 border border-secondary shadow-lg">
+                <div class="text-center mb-3">
+                    <span class="badge bg-gold text-dark px-3 py-2 fw-bold"><i class="fa-solid fa-sitemap me-1"></i> Hirarki Struktur Utama Danantara</span>
+                </div>
+                
+                <div class="tree-container text-center">
+                    <!-- Top Hierarchy Level -->
+                    <div class="tree-node border-gold mb-2" onclick="openProfileModal('prabowo')">
+                        <div class="tree-node-title">PEMBINA UTAMA</div>
+                        <div class="tree-node-name">Presiden RI Prabowo Subianto</div>
+                    </div>
+                    <div class="tree-line"></div>
+
+                    <!-- Level 2: Steering & Advisory -->
+                    <div class="d-flex justify-content-center gap-3 flex-wrap mb-2">
+                        <div class="tree-node" onclick="filterOrg('pembina')">
+                            <div class="tree-node-title">DEWAN PENGARAH</div>
+                            <div class="tree-node-name">SBY & Joko Widodo</div>
+                        </div>
+                        <div class="tree-node" onclick="filterOrg('pengawas')">
+                            <div class="tree-node-title">DEWAN PENGAWAS</div>
+                            <div class="tree-node-name">Erick Thohir & Kabinet</div>
+                        </div>
+                        <div class="tree-node" onclick="filterOrg('penasihat')">
+                            <div class="tree-node-title">GLOBAL ADVISORS</div>
+                            <div class="tree-node-name">Ray Dalio & Team</div>
+                        </div>
+                    </div>
+                    <div class="tree-line"></div>
+
+                    <!-- Level 3: CEO -->
+                    <div class="tree-node border-gold mb-2" onclick="openProfileModal('rosan')">
+                        <div class="tree-node-title">CHIEF EXECUTIVE OFFICER (CEO)</div>
+                        <div class="tree-node-name">Rosan Perkasa Roeslani</div>
+                    </div>
+                    <div class="tree-line"></div>
+
+                    <!-- Level 4: Dual Holding Officers -->
+                    <div class="d-flex justify-content-center gap-3 flex-wrap mb-2">
+                        <div class="tree-node" onclick="openProfileModal('dony')">
+                            <div class="tree-node-title">COO / HOLDING OPERASIONAL</div>
+                            <div class="tree-node-name">Dony Oskaria</div>
+                        </div>
+                        <div class="tree-node" onclick="openProfileModal('pandu')">
+                            <div class="tree-node-title">CIO / HOLDING INVESTASI</div>
+                            <div class="tree-node-name">Pandu Patria Sjahrir</div>
+                        </div>
+                        <div class="tree-node" onclick="openProfileModal('sigit')">
+                            <div class="tree-node-title">CTO / INOVASI & TEKNOLOGI</div>
+                            <div class="tree-node-name">Sigit Puji Santosa</div>
+                        </div>
+                    </div>
+                    <div class="tree-line"></div>
+
+                    <!-- Level 5: Managing Directors Group -->
+                    <div class="p-3 bg-navy rounded-3 border border-secondary d-inline-block text-center">
+                        <small class="text-gold fw-bold d-block mb-1">MANAGING DIRECTORS & EXECUTIVES</small>
+                        <span class="fs-8 text-white-50">Legal, Treasury, Risk & Sustainability, Finance, Global Relations, Chief Economist, Internal Audit</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-5 bg-white border-top border-bottom" id="holding">
+        <div class="container py-3">
+            <div class="text-center max-w-2xl mx-auto mb-5">
+                <span class="section-title-badge">Arsitektur Pengelolaan</span>
+                <h2 class="fw-bold font-cinzel display-6 text-dark">Dua Holding Utama Danantara</h2>
+                <p class="text-muted fs-6">
+                    Memisahkan fungsi efisiensi operasional BUMN dengan strategi pengembangan modal dan investasi global.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Holding 1: Asset Management -->
+                <div class="col-lg-6">
+                    <div class="holding-card h-100">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="p-3 rounded-3 bg-navy text-gold fs-3">
+                                    <i class="fa-solid fa-gears"></i>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold font-cinzel text-dark mb-0">Danantara Asset Management</h4>
+                                    <span class="badge bg-secondary fs-8">Holding Operasional</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-muted fs-7 mb-4">
+                            Fokus utama pada optimalisasi kinerja operasional, efisiensi bisnis, konsolidasi, sinergi antar BUMN, serta restrukturisasi entitas strategis negara.
+                        </p>
+
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-dark fs-7 uppercase mb-2"><i class="fa-solid fa-user-gear text-gold me-2"></i>Pimpinan Utama:</h6>
+                            <div class="p-3 bg-light rounded-3 d-flex align-items-center gap-3 border">
+                                <i class="fa-solid fa-user-check fs-4 text-navy"></i>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Dony Oskaria</h6>
+                                    <small class="text-muted">Chief Operating Officer (COO)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold text-dark fs-7 uppercase mb-2">Tugas & Tanggung Jawab Strategis:</h6>
+                        <ul class="list-unstyled space-y-2 text-muted fs-7 mb-0">
+                            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i>Konsolidasi & merger entitas BUMN sejenis.</li>
+                            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i>Peningkatan margin profitabilitas & efisiensi operasional BUMN.</li>
+                            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i>Penerapan Good Corporate Governance (GCG) skala global.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Holding 2: Investment Management -->
+                <div class="col-lg-6">
+                    <div class="holding-card h-100">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="p-3 rounded-3 bg-navy text-gold fs-3">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold font-cinzel text-dark mb-0">Danantara Investment Management</h4>
+                                    <span class="badge bg-warning text-dark fs-8">Holding Investasi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-muted fs-7 mb-4">
+                            Fokus pada re-investasi dividen BUMN, pengelolaan fund, pembentukan joint-venture dengan SWF luar negeri, serta pembiayaan hilirisasi & energi hijau.
+                        </p>
+
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-dark fs-7 uppercase mb-2"><i class="fa-solid fa-user-tie text-gold me-2"></i>Pimpinan Utama:</h6>
+                            <div class="p-3 bg-light rounded-3 d-flex align-items-center gap-3 border">
+                                <i class="fa-solid fa-user-check fs-4 text-navy"></i>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Pandu Patria Sjahrir</h6>
+                                    <small class="text-muted">Chief Investment Officer (CIO)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold text-dark fs-7 uppercase mb-2">Tugas & Tanggung Jawab Strategis:</h6>
+                        <ul class="list-unstyled space-y-2 text-muted fs-7 mb-0">
+                            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i>Penyertaan modal strategis dalam Proyek Strategis Nasional (PSN).</li>
+                            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i>Kemitraan modal bersama Sovereign Wealth Fund negara mitra (UAE, GIC, Temasek, dll).</li>
+                            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i>Pengelolaan Venture Fund & Dana Abadi (Endowment Fund).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light" id="portofolio">
+        <div class="container py-3">
+            <div class="text-center max-w-2xl mx-auto mb-4">
+                <span class="section-title-badge">Aset Strategis Bangsa</span>
+                <h2 class="fw-bold font-cinzel display-6 text-dark">Portofolio Entitas BUMN Utama</h2>
+                <p class="text-muted fs-6">
+                    Aset-aset kunci Indonesia di bawah konsolidasi pengelolaan BPI Danantara untuk menghasilkan devisa dan dividen berkelanjutan.
+                </p>
+            </div>
+
+            <!-- Sector Filter Buttons -->
+            <div class="d-flex flex-wrap gap-2 justify-content-center mb-4" id="bumnFilterButtons">
+                <button class="filter-btn active" onclick="filterBumn('all')">Semua Sektor</button>
+                <button class="filter-btn" onclick="filterBumn('perbankan')">Keuangan & Perbankan</button>
+                <button class="filter-btn" onclick="filterBumn('energi')">Energi & Telko</button>
+                <button class="filter-btn" onclick="filterBumn('tambang')">Pertambangan & Hilirisasi</button>
+                <button class="filter-btn" onclick="filterBumn('infrastruktur')">Infrastruktur & Logistik</button>
+                <button class="filter-btn" onclick="filterBumn('aviasi')">Aviasi & Transportasi</button>
+            </div>
+
+            <div class="row g-3" id="bumnGridContainer">
+                <!-- Javascript dynamic injection -->
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="simulasi">
+        <div class="container py-3">
+            <div class="text-center max-w-2xl mx-auto mb-5">
+                <span class="section-title-badge">Interaktif Proyeksi</span>
+                <h2 class="fw-bold font-cinzel display-6 text-dark">Simulasi Pertumbuhan AUM & Dividen</h2>
+                <p class="text-muted fs-6">
+                    Hitung estimasi akumulasi aset kelolaan Danantara berdasarkan laju re-investasi dividen BUMN & penyertaan modal global.
+                </p>
+            </div>
+
+            <div class="calculator-box">
+                <div class="row gy-4 align-items-center">
+                    <div class="col-lg-5">
+                        <h4 class="fw-bold font-cinzel text-gold mb-4"><i class="fa-solid fa-sliders me-2"></i>Parameter Proyeksi</h4>
+                        
+                        <!-- Slider 1: Initial AUM -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label class="form-label mb-0 fs-7 fw-semibold">Target Initial AUM ($ Billion):</label>
+                                <span class="fw-bold text-gold fs-5" id="valInitialAum">$600 B</span>
+                            </div>
+                            <input type="range" class="form-range custom-range" id="sliderInitialAum" min="100" max="1000" step="50" value="600" oninput="updateCalculator()">
+                        </div>
+
+                        <!-- Slider 2: Annual Growth Rate -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label class="form-label mb-0 fs-7 fw-semibold">Estimasi Pertumbuhan Tahunan (%):</label>
+                                <span class="fw-bold text-gold fs-5" id="valGrowthRate">8.5 %</span>
+                            </div>
+                            <input type="range" class="form-range custom-range" id="sliderGrowthRate" min="2" max="18" step="0.5" value="8.5" oninput="updateCalculator()">
+                        </div>
+
+                        <!-- Slider 3: Dividend Reinvestment -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label class="form-label mb-0 fs-7 fw-semibold">Tingkat Re-investasi Dividen BUMN (%):</label>
+                                <span class="fw-bold text-gold fs-5" id="valReinvestRate">60 %</span>
+                            </div>
+                            <input type="range" class="form-range custom-range" id="sliderReinvestRate" min="10" max="100" step="5" value="60" oninput="updateCalculator()">
+                        </div>
+
+                        <div class="p-3 rounded-3 bg-navy border border-secondary text-white-50 fs-8">
+                            <i class="fa-solid fa-circle-info text-gold me-1"></i> Simulasi ini bersifat ilustratif untuk memperkirakan pertumbuhan kapitalisasi Danantara dari konsolidasi portofolio BUMN sampai 2035.
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="bg-dark p-3 rounded-4 border border-secondary">
+                            <h6 class="fw-bold text-white mb-3 text-center fs-7"><i class="fa-solid fa-chart-area text-gold me-2"></i>Proyeksi Akumulasi AUM 2025 - 2035 ($ Billion)</h6>
+                            <div style="height: 300px; position: relative;">
+                                <canvas id="aumChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-white border-top" id="media">
+        <div class="container py-3">
+            <div class="text-center max-w-2xl mx-auto mb-5">
+                <span class="section-title-badge">Pusat Media & Transparansi</span>
+                <h2 class="fw-bold font-cinzel display-6 text-dark">Tata Kelola & Siaran Pers</h2>
+                <p class="text-muted fs-6">
+                    Informasi terkini mengenai prinsip Good Corporate Governance (GCG) dan pengawasan berlapis oleh lembaga independen negara.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="GCG Danantara" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <span class="badge bg-navy text-gold mb-2">Transparansi GCG</span>
+                            <h5 class="fw-bold text-dark fs-6 mb-2">Pengawasan Berlapis oleh KPK, BPK, & PPATK</h5>
+                            <p class="text-muted fs-7 mb-0">
+                                BPI Danantara menerapkan standar akuntabilitas mutlak dengan audit berkala oleh BPK, KPK, BPKP, dan PPATK untuk mencegah potensi penyimpangan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Global Partnership" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <span class="badge bg-gold text-dark mb-2">Kerjasama Global</span>
+                            <h5 class="fw-bold text-dark fs-6 mb-2">Kemitraan Strategis Bersama Ray Dalio & SWF Dunia</h5>
+                            <p class="text-muted fs-7 mb-0">
+                                Dewan Penasihat Global membantu merancang portofolio alokasi aset adaptif dalam menghadapi dinamika makroekonomi dan geopolitik global.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Hilirisasi Industri" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <span class="badge bg-success text-white mb-2">Pembangunan Nasional</span>
+                            <h5 class="fw-bold text-dark fs-6 mb-2">Akselerasi Hilirisasi Pertambangan & Energi Hijau</h5>
+                            <p class="text-muted fs-7 mb-0">
+                                Mengarahkan arus re-investasi modal untuk mempercepat pembangunan smelter, ekosistem baterai EV, serta infrastruktur energi terbarukan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy text-white py-5 border-top border-gold">
+        <div class="container">
+            <div class="row gy-4 mb-4">
+                <div class="col-lg-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+                            <circle cx="50" cy="50" r="48" fill="#0B192C" stroke="#D4AF37" stroke-width="4"/>
+                            <path d="M50 15 L62 38 L88 42 L68 60 L74 85 L50 72 L26 85 L32 60 L12 42 L38 38 Z" fill="#D4AF37"/>
+                        </svg>
+                        <span class="font-cinzel fw-bold fs-5 text-white">BPI DANANTARA</span>
+                    </div>
+                    <p class="text-white-50 fs-7 me-lg-4 mb-3">
+                        Badan Pengelola Investasi Daya Anagata Nusantara (BPI DANANTARA) adalah lembaga pengelola investasi negara (Sovereign Wealth Fund) Republik Indonesia.
+                    </p>
+                    <div class="d-flex gap-3 text-gold fs-5">
+                        <a href="#" class="text-gold"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" class="text-gold"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="text-gold"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="text-gold"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <h6 class="fw-bold font-cinzel text-gold mb-3">Navigasi Utama</h6>
+                    <ul class="list-unstyled space-y-2 text-white-50 fs-7">
+                        <li class="mb-2"><a href="#beranda" class="text-white-50 text-decoration-none">Beranda</a></li>
+                        <li class="mb-2"><a href="#struktur" class="text-white-50 text-decoration-none">Struktur Organisasi</a></li>
+                        <li class="mb-2"><a href="#holding" class="text-white-50 text-decoration-none">Arsitektur Holding</a></li>
+                        <li class="mb-2"><a href="#portofolio" class="text-white-50 text-decoration-none">Portofolio BUMN</a></li>
+                        <li class="mb-2"><a href="#simulasi" class="text-white-50 text-decoration-none">Simulasi AUM</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-4">
+                    <h6 class="fw-bold font-cinzel text-gold mb-3">Kantor Pusat Danantara</h6>
+                    <p class="text-white-50 fs-7 mb-2">
+                        <i class="fa-solid fa-location-dot text-gold me-2"></i> Gedung BPI Danantara, Kompleks Pusat Pemerintahan, Jakarta Pusat, DKI Jakarta, Indonesia.
+                    </p>
+                    <p class="text-white-50 fs-7 mb-2">
+                        <i class="fa-solid fa-envelope text-gold me-2"></i> info@danantara.go.id
+                    </p>
+                    <p class="text-white-50 fs-7 mb-0">
+                        <i class="fa-solid fa-phone text-gold me-2"></i> +62 (021) 1500-DANANTARA
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-top border-secondary pt-4 text-center text-white-50 fs-8">
+                <p class="mb-0">&copy; 2025 BPI DANANTARA - Badan Pengelola Investasi Daya Anagata Nusantara. Semua Hak Dilindungi Undang-Undang.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="profileDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 rounded-4 overflow-hidden shadow-2xl">
+                <div class="modal-header bg-navy text-white border-bottom border-gold p-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <img id="modalAvatar" src="" class="rounded-circle border border-gold" style="width: 60px; height: 60px; object-fit: cover;">
+                        <div>
+                            <span id="modalCategory" class="badge bg-gold text-dark fs-8 mb-1"></span>
+                            <h5 class="modal-title font-cinzel fw-bold text-white mb-0" id="modalName"></h5>
+                            <small class="text-gold fs-7" id="modalRole"></small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 bg-light">
+                    <h6 class="fw-bold text-dark mb-2 fs-7 uppercase"><i class="fa-solid fa-user-gear text-gold me-2"></i>Peran & Responsibilitas Strategis:</h6>
+                    <p class="text-muted fs-7 mb-4" id="modalDescription"></p>
+
+                    <div class="p-3 rounded-3 bg-white border">
+                        <h6 class="fw-bold text-dark fs-8 uppercase mb-2"><i class="fa-solid fa-building-columns text-navy me-2"></i>Lingkup Wewenang Resmi:</h6>
+                        <span class="badge bg-secondary me-1" id="modalScopeBadge">SWF Execution</span>
+                        <span class="badge bg-dark me-1">Republik Indonesia</span>
+                    </div>
+                </div>
+                <div class="modal-footer bg-white border-0 p-3">
+                    <button type="button" class="btn btn-dark rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Official Leadership & Advisory Roster for BPI DANANTARA
+        const personnelData = [
+            {
+                id: "prabowo",
+                name: "Presiden RI Prabowo Subianto",
+                role: "Pembina Utama BPI Danantara",
+                category: "pembina",
+                categoryLabel: "Pembina Utama",
+                badgeClass: "bg-danger text-white",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+                desc: "Memegang mandat tertinggi Pembina BPI Danantara untuk mengarahkan kebijakan strategis konsolidasi kekayaan negara demi kemakmuran nasional."
+            },
+            {
+                id: "sby",
+                name: "Susilo Bambang Yudhoyono (SBY)",
+                role: "Dewan Pengarah",
+                category: "pembina",
+                categoryLabel: "Dewan Pengarah",
+                badgeClass: "bg-danger text-white",
+                avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop",
+                desc: "Memberikan arahan geopolitik, stabilitas makro, serta pertimbangan kepemimpinan strategis jangka panjang."
+            },
+            {
+                id: "jokowi",
+                name: "Joko Widodo (Jokowi)",
+                role: "Dewan Pengarah",
+                category: "pembina",
+                categoryLabel: "Dewan Pengarah",
+                badgeClass: "bg-danger text-white",
+                avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
+                desc: "Memberikan arahan keberlanjutan Proyek Strategis Nasional (PSN), hilirisasi industri, serta pembangunan Ibu Kota Nusantara."
+            },
+            {
+                id: "erick",
+                name: "Erick Thohir",
+                role: "Ketua Dewan Pengawas (Menteri BUMN)",
+                category: "pengawas",
+                categoryLabel: "Dewan Pengawas",
+                badgeClass: "bg-navy text-gold",
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+                desc: "Memimpin pengawasan independen atas portofolio BUMN yang ditransfeksikan ke dalam struktur kelolaan Danantara."
+            },
+            {
+                id: "muliaman",
+                name: "Muliaman D. Hadad",
+                role: "Wakil Ketua Dewan Pengawas",
+                category: "pengawas",
+                categoryLabel: "Dewan Pengawas",
+                badgeClass: "bg-navy text-gold",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+                desc: "Mantan Ketua DK OJK yang mengawasi kepatuhan tata kelola keuangan, manajemen risiko, dan prudensialitas investasi."
+            },
+            {
+                id: "rosan",
+                name: "Rosan Perkasa Roeslani",
+                role: "Chief Executive Officer (CEO)",
+                category: "bod",
+                categoryLabel: "Board of Directors",
+                badgeClass: "bg-gold text-dark",
+                avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop",
+                desc: "Penanggung jawab eksekutif tertinggi atas seluruh jalannya operasional, strategi akumulasi AUM, dan hubungan investor global Danantara."
+            },
+            {
+                id: "dony",
+                name: "Dony Oskaria",
+                role: "Chief Operating Officer (COO) - Asset Mgmt",
+                category: "bod",
+                categoryLabel: "Board of Directors",
+                badgeClass: "bg-gold text-dark",
+                avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
+                desc: "Memimpin Danantara Asset Management (Holding Operasional) untuk efisiensi, konsolidasi, dan sinergi bisnis entitas BUMN."
+            },
+            {
+                id: "pandu",
+                name: "Pandu Patria Sjahrir",
+                role: "Chief Investment Officer (CIO) - Investment Mgmt",
+                category: "bod",
+                categoryLabel: "Board of Directors",
+                badgeClass: "bg-gold text-dark",
+                avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop",
+                desc: "Memimpin Danantara Investment Management (Holding Investasi) untuk re-investasi dividen, co-investment global, dan joint-venture SWF."
+            },
+            {
+                id: "sigit",
+                name: "Sigit Puji Santosa",
+                role: "Chief Technology Officer (CTO)",
+                category: "bod",
+                categoryLabel: "Board of Directors",
+                badgeClass: "bg-gold text-dark",
+                avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop",
+                desc: "Bertanggung jawab atas riset, inovasi teknologi, digitalisasi aset BUMN, serta penerapan AI dalam manajemen portofolio."
+            },
+            {
+                id: "dalio",
+                name: "Ray Dalio",
+                role: "Dewan Penasihat Global",
+                category: "penasihat",
+                categoryLabel: "Penasihat Global",
+                badgeClass: "bg-primary text-white",
+                avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=200&auto=format&fit=crop",
+                desc: "Founder Bridgewater Associates. Memberikan penasihat makroekonomi, manajemen risiko siklus pasar, dan Diversifikasi All Weather."
+            },
+            {
+                id: "sachs",
+                name: "Jeffrey Sachs",
+                role: "Dewan Penasihat Global",
+                category: "penasihat",
+                categoryLabel: "Penasihat Global",
+                badgeClass: "bg-primary text-white",
+                avatar: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=200&auto=format&fit=crop",
+                desc: "Ekonom ternama dunia untuk strategi pembangunan berkelanjutan (SDGs) dan transisi energi bersih."
+            },
+            {
+                id: "robertus",
+                name: "Robertus Bilitea",
+                role: "Managing Director - Legal & Compliance",
+                category: "md",
+                categoryLabel: "Managing Director",
+                badgeClass: "bg-dark text-white",
+                avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=200&auto=format&fit=crop",
+                desc: "Memimpin bidang kepatuhan hukum, audit legalitas investasi, dan penyusunan regulasi perlindungan aset negara."
+            },
+            {
+                id: "arief",
+                name: "Arief Budiman",
+                role: "Managing Director - Finance",
+                category: "md",
+                categoryLabel: "Managing Director",
+                badgeClass: "bg-dark text-white",
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+                desc: "Mengelola akuntansi, perencanaan keuangan, pelaporan neraca konsolidasi, serta strategi likuiditas."
+            },
+            {
+                id: "reza",
+                name: "Reza Yamora Siregar",
+                role: "Chief Economist",
+                category: "md",
+                categoryLabel: "Managing Director",
+                badgeClass: "bg-dark text-white",
+                avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop",
+                desc: "Memimpin riset ekonomi makro, pemodelan proyeksi dividen, dan analisis pasar keuangan domestik maupun global."
+            },
+            {
+                id: "kpk",
+                name: "Komite Pengawasan Terpadu",
+                role: "BPK, KPK, BPKP, PPATK, Kapolri & Kejagung",
+                category: "komite",
+                categoryLabel: "Komite Akuntabilitas",
+                badgeClass: "bg-success text-white",
+                avatar: "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=200&auto=format&fit=crop",
+                desc: "Lembaga negara pengawas independen yang mengaudit, memantau transparansi, serta menjamin kebersihan tata kelola Danantara."
+            }
+        ];
+
+        // Official BUMN Portfolio Data
+        const bumnData = [
+            { name: "Bank Mandiri", sector: "perbankan", val: "$35B+", icon: "fa-building-columns" },
+            { name: "Bank Rakyat Indonesia (BRI)", sector: "perbankan", val: "$42B+", icon: "fa-wheat-awn" },
+            { name: "Bank Negara Indonesia (BNI)", sector: "perbankan", val: "$18B+", icon: "fa-vault" },
+            { name: "Bank Tabungan Negara (BTN)", sector: "perbankan", val: "$8B+", icon: "fa-house-lock" },
+            { name: "PT Pertamina (Persero)", sector: "energi", val: "$70B+", icon: "fa-gas-pump" },
+            { name: "PT PLN (Persero)", sector: "energi", val: "$65B+", icon: "fa-bolt" },
+            { name: "Telkom Indonesia", sector: "energi", val: "$25B+", icon: "fa-tower-cell" },
+            { name: "MIND ID (Mining Industry Indonesia)", sector: "tambang", val: "$30B+", icon: "fa-mountain" },
+            { name: "PT Aneka Tambang (Antam)", sector: "tambang", val: "$6B+", icon: "fa-gem" },
+            { name: "PT Bukit Asam (PTBA)", sector: "tambang", val: "$5B+", icon: "fa-cubes-stacked" },
+            { name: "PT Freeport Indonesia", sector: "tambang", val: "$20B+", icon: "fa-coins" },
+            { name: "Pupuk Indonesia", sector: "infrastruktur", val: "$12B+", icon: "fa-seedling" },
+            { name: "Pelindo (Pelabuhan Indonesia)", sector: "infrastruktur", val: "$15B+", icon: "fa-ship" },
+            { name: "Jasa Marga", sector: "infrastruktur", val: "$9B+", icon: "fa-road" },
+            { name: "Garuda Indonesia", sector: "aviasi", val: "$3B+", icon: "fa-plane" },
+            { name: "InJourney (Aviasi & Pariwisata)", sector: "aviasi", val: "$10B+", icon: "fa-hotel" }
+        ];
+
+        let chartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarCollapse = document.getElementById('navbarMenu');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+
+            // Fix for mobile navbar: auto close when a link is clicked
+            const navLinks = document.querySelectorAll('#navbarMenu .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
+                        bsCollapse.hide();
+                    }
+                });
+            });
+
+            // Auto close when user clicks outside navbar on mobile
+            document.addEventListener('click', (event) => {
+                const isClickInsideNav = navbarCollapse.contains(event.target) || navbarToggler.contains(event.target);
+                if (!isClickInsideNav && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
+                    bsCollapse.hide();
+                }
+            });
+
+            // Initial render
+            renderOrgCards('all');
+            renderBumnList('all');
+            initChart();
+        });
+
+        function filterOrg(category) {
+            const buttons = document.querySelectorAll('#filterButtonGroup .filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(`'${category}'`)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            renderOrgCards(category);
+        }
+
+        function renderOrgCards(category) {
+            const container = document.getElementById('cardGridView');
+            container.innerHTML = '';
+
+            const filtered = category === 'all' 
+                ? personnelData 
+                : personnelData.filter(item => item.category === category);
+
+            filtered.forEach(person => {
+                const cardCol = document.createElement('div');
+                cardCol.className = 'col-sm-6 col-md-4 col-lg-3';
+                cardCol.innerHTML = `
+                    <div class="org-card" onclick="openProfileModal('${person.id}')">
+                        <div class="org-avatar-box">
+                            <img src="${person.avatar}" class="org-avatar-img" alt="${person.name}">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="category-badge ${person.badgeClass} mb-2 d-inline-block">${person.categoryLabel}</span>
+                            <h6 class="fw-bold text-dark mb-1 fs-7 font-cinzel">${person.name}</h6>
+                            <p class="text-muted fs-8 mb-0">${person.role}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardCol);
+            });
+        }
+
+        function switchView(mode) {
+            const cardView = document.getElementById('cardGridView');
+            const treeView = document.getElementById('treeChartView');
+            const cardBtn = document.getElementById('viewCardBtn');
+            const treeBtn = document.getElementById('viewTreeBtn');
+
+            if (mode === 'card') {
+                cardView.classList.remove('d-none');
+                treeView.classList.add('d-none');
+                cardBtn.classList.add('btn-dark', 'active');
+                cardBtn.classList.remove('btn-outline-dark');
+                treeBtn.classList.add('btn-outline-dark');
+                treeBtn.classList.remove('btn-dark', 'active');
+            } else {
+                cardView.classList.add('d-none');
+                treeView.classList.remove('d-none');
+                treeBtn.classList.add('btn-dark', 'active');
+                treeBtn.classList.remove('btn-outline-dark');
+                cardBtn.classList.add('btn-outline-dark');
+                cardBtn.classList.remove('btn-dark', 'active');
+            }
+        }
+
+        function openProfileModal(personId) {
+            const person = personnelData.find(p => p.id === personId);
+            if (!person) return;
+
+            document.getElementById('modalAvatar').src = person.avatar;
+            document.getElementById('modalName').textContent = person.name;
+            document.getElementById('modalRole').textContent = person.role;
+            document.getElementById('modalCategory').textContent = person.categoryLabel;
+            document.getElementById('modalDescription').textContent = person.desc;
+
+            const modal = new bootstrap.Modal(document.getElementById('profileDetailModal'));
+            modal.show();
+        }
+
+        function handleQuickSearch(event) {
+            const query = event.target.value.toLowerCase().trim();
+            const container = document.getElementById('cardGridView');
+            container.innerHTML = '';
+
+            const filtered = personnelData.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.role.toLowerCase().includes(query) ||
+                p.categoryLabel.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fa-solid fa-user-slash fs-1 text-muted mb-2"></i>
+                        <p class="text-muted">Tidak ditemukan hasil untuk "${query}"</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(person => {
+                const cardCol = document.createElement('div');
+                cardCol.className = 'col-sm-6 col-md-4 col-lg-3';
+                cardCol.innerHTML = `
+                    <div class="org-card" onclick="openProfileModal('${person.id}')">
+                        <div class="org-avatar-box">
+                            <img src="${person.avatar}" class="org-avatar-img" alt="${person.name}">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="category-badge ${person.badgeClass} mb-2 d-inline-block">${person.categoryLabel}</span>
+                            <h6 class="fw-bold text-dark mb-1 fs-7 font-cinzel">${person.name}</h6>
+                            <p class="text-muted fs-8 mb-0">${person.role}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardCol);
+            });
+        }
+
+        function filterBumn(sector) {
+            const buttons = document.querySelectorAll('#bumnFilterButtons .filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(`'${sector}'`)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            renderBumnList(sector);
+        }
+
+        function renderBumnList(sector) {
+            const container = document.getElementById('bumnGridContainer');
+            container.innerHTML = '';
+
+            const filtered = sector === 'all' 
+                ? bumnData 
+                : bumnData.filter(b => b.sector === sector);
+
+            filtered.forEach(bumn => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-3';
+                col.innerHTML = `
+                    <div class="bumn-card d-flex align-items-center gap-3">
+                        <div class="bumn-icon">
+                            <i class="fa-solid ${bumn.icon}"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold text-dark mb-0 fs-7">${bumn.name}</h6>
+                            <small class="text-gold fw-bold fs-8">Estimasi Aset: ${bumn.val}</small>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(col);
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('aumChart').getContext('2d');
+            
+            const years = ['2025', '2027', '2029', '2031', '2033', '2035'];
+            const initialData = [600, 710, 840, 990, 1170, 1380];
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: 'Proyeksi Kapitalisasi AUM ($ Billion)',
+                        data: initialData,
+                        borderColor: '#D4AF37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: '#D4AF37',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#ffffff', font: { family: 'Inter' } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        },
+                        y: {
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateCalculator() {
+            const initialAum = parseFloat(document.getElementById('sliderInitialAum').value);
+            const growthRate = parseFloat(document.getElementById('sliderGrowthRate').value) / 100;
+            const reinvestRate = parseFloat(document.getElementById('sliderReinvestRate').value) / 100;
+
+            document.getElementById('valInitialAum').textContent = `$${initialAum} B`;
+            document.getElementById('valGrowthRate').textContent = `${(growthRate * 100).toFixed(1)} %`;
+            document.getElementById('valReinvestRate').textContent = `${(reinvestRate * 100).toFixed(0)} %`;
+
+            const years = [2025, 2027, 2029, 2031, 2033, 2035];
+            let currentVal = initialAum;
+            const projectedData = years.map((year, index) => {
+                if (index === 0) return Math.round(initialAum);
+                const effectiveRate = growthRate + (reinvestRate * 0.03);
+                currentVal = currentVal * Math.pow(1 + effectiveRate, 2);
+                return Math.round(currentVal);
+            });
+
+            if (chartInstance) {
+                chartInstance.data.datasets[0].data = projectedData;
+                chartInstance.update();
+            }
+        }
+    </script>
+</body>
+</html>
